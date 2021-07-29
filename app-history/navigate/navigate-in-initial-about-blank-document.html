@@ -1,0 +1,13 @@
+<!doctype html>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<body>
+<script>
+promise_test(t => {
+  let i = document.createElement("iframe");
+  i.src = "/common/blank.html";
+  document.body.appendChild(i);
+  return i.contentWindow.appHistory.navigate("#");
+}, "navigate in initial about:blank document");
+</script>
+</body>

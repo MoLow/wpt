@@ -1,0 +1,16 @@
+<!doctype html>
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<iframe id="i" src="/common/blank.html"></iframe>
+<script>
+async_test(t => {
+  let iframe_exception = i.contentWindow.DOMException;
+  window.onload = t.step_func(() => {
+    i.contentWindow.onbeforeunload = t.step_func(() => {
+      promise_rejects_dom(t, 'AbortError', iframe_exception, i.contentWindow.appHistory.navigate("#")).then(() => t.done());
+      return false;
+    });
+    promise_rejects_dom(t, 'AbortError', iframe_exception, i.contentWindow.appHistory.navigate("?1"));
+  });
+}, "Navigate inside onbeforeunload");
+</script>

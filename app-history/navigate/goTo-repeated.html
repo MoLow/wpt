@@ -9,9 +9,17 @@ async_test(t => {
     let key = appHistory.current.key;
     await appHistory.navigate("#1");
 
-    let first_promise = appHistory.goTo(key);
-    appHistory.goTo(key);
-    await promise_rejects_dom(t, 'AbortError', first_promise);
+    let first_promise_resolved = false;
+    let second_promise_resolved = false;
+    let first_promise = appHistory.goTo(key).then(() => first_promise_resolved = true);
+    let second_promise = appHistory.goTo(key).then(() => second_promise_resolved = true);
+    assert_false(first_promise_resolved);
+    assert_false(second_promise_resolved);
+    await first_promise;
+    t.step_func(() => {
+      assert_true(first_promise_resolved);
+      assert_true(second_promise_resolved);
+    })();
     t.done();
   }, 0);
 }, "Repeated navigate.goTo()");
