@@ -733,7 +733,7 @@ class MockRuntime {
           leftDegrees: 50.899,
           rightDegrees: 35.197
         },
-        headFromEye: composeGFXTransform({
+        mojoFromView: composeGFXTransform({
           position: [-0.032, 0, 0],
           orientation: [0, 0, 0, 1]
         }),
@@ -747,7 +747,7 @@ class MockRuntime {
           leftDegrees: 50.899,
           rightDegrees: 35.197
         },
-        headFromEye: composeGFXTransform({
+        mojoFromView: composeGFXTransform({
           position: [0.032, 0, 0],
           orientation: [0, 0, 0, 1]
         }),
@@ -807,7 +807,7 @@ class MockRuntime {
     return {
       eye: viewEye,
       fieldOfView: fov,
-      headFromEye: composeGFXTransform(fakeXRViewInit.viewOffset),
+      mojoFromView: composeGFXTransform(fakeXRViewInit.viewOffset),
       viewport: {
         width: fakeXRViewInit.resolution.width,
         height: fakeXRViewInit.resolution.height
